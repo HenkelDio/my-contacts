@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import arrow from '../../assets/icons/arrow.svg';
 import edit from '../../assets/icons/edit.svg';
 import trash from '../../assets/icons/trash.svg';
+import Loader from '../../components/Loader';
+import Modal from '../../components/Modal';
 import {
   Container, InputSearch, Header, ListContainer, Card,
 } from './styles';
@@ -39,9 +41,9 @@ export default function ContactsList() {
             <span>(41) 99809-3673</span>
           </div>
           <div className="actions">
-            <a href="/">
+            <Link to="/edit/123">
               <img src={edit} alt="edit" />
-            </a>
+            </Link>
             <button type="button">
               <img src={trash} alt="delete" />
             </button>

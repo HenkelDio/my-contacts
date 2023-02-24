@@ -1,5 +1,5 @@
 {
-  "name": "state",
+  "name": "mycontacts",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -30,5 +30,7 @@
   },
   "scripts": {
     "dev": "webpack serve"
-  }
+  },
+  "repository": "https://github.com/HenkelDio/my-contacts.git",
+  "author": "HenkelDio <willianhenkel@gmail.com>"
 }
