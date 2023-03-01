@@ -4,4 +4,10 @@ export const Container = styled.div`
  & + & {
   margin-top: 16px;
  }
+
+ small {
+  color: ${(props) => props.theme.colors.danger.main};
+  margin-top: 8px;
+  display: block;
+ }
 `;
