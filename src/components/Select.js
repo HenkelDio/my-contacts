@@ -13,6 +13,7 @@ export default styled.select`
   font-family: 'Sora', sans-serif;
   border: 2px solid #fff;
   transition: border-color 0.2s ease-in;
+  appearance: none;
 
   &:focus{
     border: 2px solid ${(props) => props.theme.colors.primary.main};
