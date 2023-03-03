@@ -17,4 +17,12 @@ export default styled.input`
   &:focus{
     border: 2px solid ${(props) => props.theme.colors.primary.main};
   }
+
+  ${({ theme, error }) => error && css`
+    border: 2px solid ${theme.colors.danger.main};
+
+    &:focus {
+      border: 2px solid ${theme.colors.danger.main};
+    }
+  `};
 `;
