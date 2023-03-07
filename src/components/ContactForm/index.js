@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import isEmailValid from '../../utils/isEmailValid';
+import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 import FormGroup from '../FormGroup';
 
@@ -12,10 +13,14 @@ import Button from '../Button';
 export default function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
 
-  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
+  const {
+    setError, removeError, getErrorMessageByFieldName, errors,
+  } = useErrors();
+
+  const isFormValid = (name && errors.length === 0);
 
   function handleChangeName(e) {
     setName(e.target.value);
@@ -37,28 +42,33 @@ export default function ContactForm({ buttonLabel }) {
     }
   }
 
+  function handlePhoneChange(e) {
+    setPhone(formatPhone(e.target.value));
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log(
       {
-        name, email, number, category,
+        name, email, phone: phone.replace(/\D/g, ''), category,
       },
     );
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
           error={getErrorMessageByFieldName('name')}
-          placeholder="Nome"
+          placeholder="Nome *"
           value={name}
           onChange={(e) => handleChangeName(e)}
         />
       </FormGroup>
       <FormGroup error={getErrorMessageByFieldName('email')}>
         <Input
+          type="email"
           error={getErrorMessageByFieldName('email')}
           placeholder="Email"
           value={email}
@@ -68,8 +78,9 @@ export default function ContactForm({ buttonLabel }) {
       <FormGroup>
         <Input
           placeholder="Telefone"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
+          value={phone}
+          onChange={(e) => handlePhoneChange(e)}
+          maxLength="15"
         />
       </FormGroup>
       <FormGroup>
@@ -81,7 +92,7 @@ export default function ContactForm({ buttonLabel }) {
       </FormGroup>
 
       <ButtonContainer>
-        <Button type="submit">
+        <Button type="submit" disabled={!isFormValid}>
           {buttonLabel}
         </Button>
       </ButtonContainer>
