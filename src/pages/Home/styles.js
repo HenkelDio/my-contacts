@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   width: 500px;
@@ -52,12 +52,11 @@ export const Header = styled.div`
   }
 `;
 
-export const ListContainer = styled.div`
-  margin-top: 24px;
-
-
-  header {
+export const ListHeader = styled.header`
+    margin-top: 24px;
     margin-bottom: 8px;
+
+
     button {
     background: transparent;
     border: none;
@@ -65,12 +64,16 @@ export const ListContainer = styled.div`
     align-items: center;
     cursor: pointer;
 
-    span {
-      margin-right: 8px;
-      font-weight: bold;
-      color: ${({ theme }) => theme.colors.primary.main};
-    }
-  }
+      span {
+        margin-right: 8px;
+        font-weight: bold;
+        color: ${({ theme }) => theme.colors.primary.main};
+      }
+
+      img {
+        transform: ${({ orderBy }) => (orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
+        transition: transform 0.2s ease-in;
+      }
   }
 `;
 
